@@ -1,3 +1,6 @@
+// Section 4: DOM Projects
+// Task List[Part 1] - UI & Add Task Items
+
 // Define UI Variables
 const form = document.querySelector('#task-form'); // you can use getElementById if you want // this is the the entire new task, add task, task list form
 const taskList = document.querySelector('.collection'); // this is the ul
