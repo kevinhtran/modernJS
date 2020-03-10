@@ -19,7 +19,10 @@ function loadEventListeners() {
   form.addEventListener('submit', addTask);
   // Remove task event
   taskList.addEventListener('click', removeTask);
+  // Clear task event
+  clearBtn.addEventListener('click', clearTasks);
 }
+
 
 // Add Task
 // Note: in materialize CDN, your ul will have a class of "collection" and your li will have a class of "collection-item"
@@ -59,7 +62,19 @@ function addTask(e) {
 function removeTask(e) {
   if(e.target.parentElement.classList.contains('delete-item')) {
     if(confirm('Are You Sure?')) {
-      e.target.parentElement.parentElement.remove()); // this will bring us to the li and then removes the task by clicking on the x
+      e.target.parentElement.parentElement.remove(); // this will bring us to the li and then removes the task by clicking on the x
     }
   }
+}
+
+// Clear Tasks
+function clearTasks() {
+  // taskList.innerHTML = ''; // one way of doing it
+
+  // Faster way
+  while(taskList.firstChild) {
+    taskList.removeChild(taskList.firstChild);
+  }
+  
+  // https://jsperf.com/innerhtml-vs-removechild
 }
