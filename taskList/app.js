@@ -1,5 +1,7 @@
 // Section 4: DOM Projects
-// Task List[Part 1] - UI & Add Task Items
+
+// Task List[Part 2]- Delete & Filter Tasks
+// Objective: Remove tasks by clicking 'X' buttons on task list
 
 // Define UI Variables
 const form = document.querySelector('#task-form'); // you can use getElementById if you want // this is the the entire new task, add task, task list form
@@ -11,11 +13,12 @@ const taskInput = document.querySelector('#task'); // where you input a new task
 // Load all event listeners
 loadEventListeners();
 
-
 // Load all event listeners
 function loadEventListeners() {
   // Add task event
   form.addEventListener('submit', addTask);
+  // Remove task event
+  taskList.addEventListener('click', removeTask);
 }
 
 // Add Task
@@ -50,4 +53,13 @@ function addTask(e) {
   taskInput.value = '';
 
   e.preventDefault();
+}
+
+// Remove Task
+function removeTask(e) {
+  if(e.target.parentElement.classList.contains('delete-item')) {
+    if(confirm('Are You Sure?')) {
+      e.target.parentElement.parentElement.remove()); // this will bring us to the li and then removes the task by clicking on the x
+    }
+  }
 }
