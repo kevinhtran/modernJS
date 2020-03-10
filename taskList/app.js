@@ -149,6 +149,14 @@ function clearTasks() {
   }
 
   // https://jsperf.com/innerhtml-vs-removechild
+
+  // Clear from LS
+  clearTasksFromLocalStorage();
+}
+
+// Clear Tasks from LS
+function clearTasksFromLocalStorage() {
+  localStorage.clear();
 }
 
 // Filter Tasks
