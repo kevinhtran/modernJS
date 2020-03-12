@@ -2,11 +2,22 @@
 // [Part 3] - Loader & User Experience
 
 // Listen for submit
-document.getElementById('loan-form').addEventListener('submit', calculateResults);
+// We want to delay our calculateResults function
+document.getElementById('loan-form').addEventListener('submit', function(e) {
+  // Hide results
+  document.getElementById('results').style.display = 'none';
+  
+  // Show loader
+  document.getElementById('loading').style.display = 'block';
+
+  setTimeout(calculateResults, 2000);
+
+  e.preventDefault();
+});
 
 // Calculate Results
-function calculateResults(e){
-  // console.log('Calculating...');
+function calculateResults(){
+  console.log('Calculating...');
 
   // UI Vars
   // we need all of our form fields
@@ -31,15 +42,25 @@ function calculateResults(e){
     monthlyPayment.value = monthly.toFixed(2);
     totalPayment.value = (monthly * calculatedPayments).toFixed(2);
     totalInterest.value = ((monthly * calculatedPayments) - principal).toFixed(2);
+    
+    // Show results
+    document.getElementById('results').style.display = 'block';
+
+    // Hide loader
+    document.getElementById('loading').style.display = 'none';
+
   } else {
     showError('Please check your numbers')
   }
-
-  e.preventDefault();
 }
 
 // Show Error
 function showError(error) {
+  // Hide results
+  document.getElementById('results').style.display = 'none';
+
+  // Hide loader
+  document.getElementById('loading').style.display = 'none';
   const errorDiv = document.createElement('div');
 
   // Get elements
