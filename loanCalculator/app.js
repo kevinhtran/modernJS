@@ -1,5 +1,5 @@
 // Section 4: Loan Calculator
-// [Part 2] - Calculate & Error
+// [Part 3] - Loader & User Experience
 
 // Listen for submit
 document.getElementById('loan-form').addEventListener('submit', calculateResults);
