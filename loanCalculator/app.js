@@ -17,6 +17,11 @@ function calculateResults(e){
   const UItotalpayment = document.getElementById('total-payment');
   const UItotalinterest = document.getElementById('total-interest');
 
+  // parseFloat() will turn it into a decimal
+  // Calculation/Formulas for principal, interest, and payments 
+  const principal = parseFloat(amount.value);
+  const calculatedInterest = parseFloat(interest.value) / 100 / 12;
+  const calculatedPayments = parseFloat(years.value) * 12;
 
   e.preventDefault();
 }
