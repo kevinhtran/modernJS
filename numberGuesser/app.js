@@ -1,5 +1,5 @@
 // Section 4: Number Guesser Project
-// [Part 3] - Lose Case & Game Over
+// [Part 4] - Play Again
 
 /* 
 GAME FUNCTION:
