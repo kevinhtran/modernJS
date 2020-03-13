@@ -29,5 +29,14 @@ const game = document.querySelector('#game'),
 minNum.textContent = min;
 maxNum.textContent = max;
 
+// Listen for guess
+guessBtn.addEventListener('click', function() {
+  let guess = parseInt(console.log(guessInput.value));
+  // Validate
+  if(guess === NaN || guess < min || guess > max) {
+    setMessage(`Please enter a number between ${min} and ${max}`);
+  }
+});
+
 
 
