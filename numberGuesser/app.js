@@ -14,7 +14,7 @@ GAME FUNCTION:
 // notice this convention of defining variables
 let min = 1,
   max = 10,
-  winningNum = 2,
+  winningNum = getRandomNum(min, max),
   guessesLeft = 3;
 
 // UI elements
@@ -104,6 +104,11 @@ function gameOver(won, msg) {
   // Play again?
   guessBtn.value = 'Play Again';
   guessBtn.className += 'play-again';
+}
+
+// Get Winning Number
+function getRandomNum(min, max){
+  console.log(Math.floor(Math.random()*(max-min+1)+min)); // this itself should give us between 0 - 9
 }
 
 // Set message
