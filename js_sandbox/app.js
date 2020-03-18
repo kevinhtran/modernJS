@@ -1,32 +1,55 @@
 // Section 5: Object Oriented JavaScript - ES5 - ES2015(ES6)
-// Built in Constructors
+// Prototypes
 
-// String
-const name1 = 'Jeff';
-const name2 = new String('Jeff'); // create the string as an object. remember the new keyword calls a constructor
+// Each object in JS has a prototype and a prototype is an object itself.
+// All objects inherit their properties and methods from their prototype.
+// object literals, you're inheriting from a prototype called Object.prototype
+// when you're dealing with prototypes that were created through a constructor like for instance the person. it's going to be Person.prototype
 
-// Number
-const num1 = 5;
-const num2 = new Number(5);
+// Object.prototype
+// Person.prototype
 
-// Boolean
-const bool1 = true;
-const bool2 = new Boolean(true);
-
-// Function
-const getSum1 = function(x, y) {
-  return x + y;
+// Person constructor
+function Person(firstName, lastName, dob) {
+  this.firstName = firstName;
+  this.lastName = lastName;
+  this.birthday = new Date(dob);
+  // this.calculateAge = function(){
+  //   const diff = Date.new() - this.birthday.getTime();
+  //   const agedate = new Date(diff);
+  //   return Math.abs(ageDate.getUTCFullYera() - 1970)
+  // }
 }
-const getSum2 = new Function('x', 'y', 'return 1 + 1');
 
-// Objects
-const john = {name: 'John'};
-const john1 = new Object({name: 'John'});
+// Calculate age
+Person.prototype.calculateAge = function(){
+  const diff = Date.now() - this.birthday.getTime();
+  const ageDate = new Date(diff);
+  return Math.abs(ageDate.getUTCFullYear() - 1970);
+}
 
-// Arrays
-const arr1 = [1,2,3,4];
-const arr2 = new Array(1,2,3,4);
+// Get full name
+Person.prototype.getFullName = function() {
+  return `${this.firstName} ${this.lastName}`;
+}
 
-// Regular Expressions
-const re1 = /\w+/;
-const re2 = new RegExp('\w+');
+// Gets Married
+Person.prototype.getsMarried = function(newLast?Name) {
+  this.lastName = newLastName;
+}
+
+const john = new Person('John', Doe', '8-12-90');
+const mary = new Person ('Mary', 'Johnson', 'March 20 1978');
+
+
+console.log(mary);
+
+console.log(john.calculateAge());
+
+console.log(mary.getFullName());
+
+mary.getsMarried('Smith');
+console.log(mary.getFullName());
+
+
+
