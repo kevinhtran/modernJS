@@ -1,49 +1,32 @@
 // Section 5: Object Oriented JavaScript - ES5 - ES2015(ES6)
-// Prototypal Inheritance
+// Using Object.create
 
-// Objective: One object type inherit from another
+ const personPrototypes = {
+   greeting: function() {
+     return `Hello there ${this.firstName} ${this.lastName}`
+   },
+   getsMarried: function(newLastName) {
+     this.lastName = newlastName;
+   }
+ }
 
-// Person constructor
-// Create a person and inherit it's cusomter/prototype
+ const mary = Object.create(personPrototypes);
+mary.firstName = 'Mary';
+mary.lastName = 'Williams';
+mary.age = 30;
 
-function Person(firstName, lastName){
-  this.firstName = firstName;
-  this.lastName = lastName;
-}
+mary.getsMarried('Thompson');
 
-// Greeting
-Person.prototype.greeting = function(){
-  return `Hello there ${this.firstName} ${this.lastName}`;
-}
+console.log(mary.greeting());
 
-const person1 = new Person('John', 'Doe');
+const brad = Object.create(personPrototypes, {
+  firstName: {value: "Brad"},
+  lastName: {value: "Traversy"},
+  age: {value: 36}
+});
 
-// console.log(person1.greeting());
+console.log(brad);
 
-// Customer constructor
-function Customer(firstName, lastName, phone, membership) {
-  Person.call(this, firstName, lastName);
+console.log(brad.greeting());
 
-  this.phone = phone;
-  this.membership = membership;
-}
-
-// Inherit the Person prototype methods
-Customer.prototype = Object.create(Person.prototype);
-
-// Make customer.prototype return Customer()
-Customer.prototype.contructor = Customer;
-
-// Create customer
-const customer1 = new Customer('Tom', 'Smith', '555-555-5555', 'Standard');
-
-console.log(customer1);
-
-// Customer greeting
-Customer.prototype.greeting = functoin(){
-  return `Hello there ${this.firstName} ${this.lastName}`;
-}
-
-console.log(customer.greeting());
-
-// any prototype method that we add to the person will now be accessible through the customer
+// this is an alternative way to create object using Object.create method
