@@ -1,37 +1,36 @@
 // Section 5: Object Oriented JavaScript - ES5 - ES2015(ES6)
-// ES6 Classes
-// Classes are considered syntactic sugar or convenience syntax because we're just changing the way we write them and not the way that it works under the hood
+// Sub Classes - Inheritence in ES6 classes
 
+// class that you're creating
 class Person {
-  constructor(firstName, lastName, dob) {
+  constructor(firstName, lastName) {
     this.firstName = firstName;
     this.lastName = lastName;
-    this.birthday = new Date(dob);
   }
 
   greeting() {
-      return  `Hello there ${this.firstName} ${this.lastName}`;
-  }
-
-  calculateAge() {
-    const diff = Date.now() - this.birthday.getTime();
-    const ageDate = new Date(diff);
-    return Math.abs(ageDate.getUTCFullYear() - 1970);
-  }
-
-  getsMarried(newLastName) {
-    this.lastName = newLastName;
-  }
-
-  static addNumbers(x, y) { // static method. standalone functions
-    return x + y;
+    return `Hello there ${this.firstName} ${this.lastName}`
   }
 }
 
-const mary = new Person('Mary', 'Williams', '11-13-1980');
+// class that you're extending
+class Customer extends Person {
+  constructor(firstName, lastName, phone, membership) {
+    super(firstName, lastName); // calls the parent class constructor, you have to pass in whatever parameters that was in the parent class and anything extra is just in this sub class
 
-mary.getsMarried('Thompson');
+    this.phone = phone;
+    this.membership  = membership;
+  }
 
-console.log(mary.greeting());
-console.log(mary.calculateAge());
-console.log(Person.addNumbers(1,2));
+  static getMembershipCost() {
+    return 500;
+  }
+}
+
+// instantiate a new customer
+const john = new Customer('John', 'Doe', '555-555-5555');
+
+console.log(john);
+console.log(john.greeting); 
+console.log(Customer.getMembershipCost()); // Since it's a static method, you use the actual class name. It's only one way because you didn't extend customer, you extended person.
+
