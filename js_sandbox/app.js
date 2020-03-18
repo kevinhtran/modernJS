@@ -1,55 +1,49 @@
 // Section 5: Object Oriented JavaScript - ES5 - ES2015(ES6)
-// Prototypes
+// Prototypal Inheritance
 
-// Each object in JS has a prototype and a prototype is an object itself.
-// All objects inherit their properties and methods from their prototype.
-// object literals, you're inheriting from a prototype called Object.prototype
-// when you're dealing with prototypes that were created through a constructor like for instance the person. it's going to be Person.prototype
-
-// Object.prototype
-// Person.prototype
+// Objective: One object type inherit from another
 
 // Person constructor
-function Person(firstName, lastName, dob) {
+// Create a person and inherit it's cusomter/prototype
+
+function Person(firstName, lastName){
   this.firstName = firstName;
   this.lastName = lastName;
-  this.birthday = new Date(dob);
-  // this.calculateAge = function(){
-  //   const diff = Date.new() - this.birthday.getTime();
-  //   const agedate = new Date(diff);
-  //   return Math.abs(ageDate.getUTCFullYera() - 1970)
-  // }
 }
 
-// Calculate age
-Person.prototype.calculateAge = function(){
-  const diff = Date.now() - this.birthday.getTime();
-  const ageDate = new Date(diff);
-  return Math.abs(ageDate.getUTCFullYear() - 1970);
+// Greeting
+Person.prototype.greeting = function(){
+  return `Hello there ${this.firstName} ${this.lastName}`;
 }
 
-// Get full name
-Person.prototype.getFullName = function() {
-  return `${this.firstName} ${this.lastName}`;
+const person1 = new Person('John', 'Doe');
+
+// console.log(person1.greeting());
+
+// Customer constructor
+function Customer(firstName, lastName, phone, membership) {
+  Person.call(this, firstName, lastName);
+
+  this.phone = phone;
+  this.membership = membership;
 }
 
-// Gets Married
-Person.prototype.getsMarried = function(newLast?Name) {
-  this.lastName = newLastName;
+// Inherit the Person prototype methods
+Customer.prototype = Object.create(Person.prototype);
+
+// Make customer.prototype return Customer()
+Customer.prototype.contructor = Customer;
+
+// Create customer
+const customer1 = new Customer('Tom', 'Smith', '555-555-5555', 'Standard');
+
+console.log(customer1);
+
+// Customer greeting
+Customer.prototype.greeting = functoin(){
+  return `Hello there ${this.firstName} ${this.lastName}`;
 }
 
-const john = new Person('John', Doe', '8-12-90');
-const mary = new Person ('Mary', 'Johnson', 'March 20 1978');
+console.log(customer.greeting());
 
-
-console.log(mary);
-
-console.log(john.calculateAge());
-
-console.log(mary.getFullName());
-
-mary.getsMarried('Smith');
-console.log(mary.getFullName());
-
-
-
+// any prototype method that we add to the person will now be accessible through the customer
