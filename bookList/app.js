@@ -21,7 +21,7 @@ UI.prototype.addBookToList = function(book) {
   // Create tr element
   const row = document.createElement('tr');
   // Insert cols
-  row.innerHTML = `y
+  row.innerHTML = `
     <td>${book.title}</td>
     <td>${book.author}</td>
     <td>${book.isbn}</td>
