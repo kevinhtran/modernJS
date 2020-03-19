@@ -1,5 +1,5 @@
 // Section 6: OOP Book List Project
-// Validation and Alert
+// Delete Book From List
 
 // Book Constructor
 // handles creating the actual book object
@@ -21,7 +21,7 @@ UI.prototype.addBookToList = function(book) {
   // Create tr element
   const row = document.createElement('tr');
   // Insert cols
-  row.innerHTML = `
+  row.innerHTML = `y
     <td>${book.title}</td>
     <td>${book.author}</td>
     <td>${book.isbn}</td>
@@ -51,6 +51,13 @@ UI.prototype.showAlert = function(message, className) {
   }, 3000);
 }
 
+// Delete book
+UI.prototype.deleteBook = function(target) {
+  if(target.className === 'delete') {
+    target.parentElement.parentElement.remove(); // dom traversing
+  }
+}
+
 // Clear Fields
 UI.prototype.clearFields = function() {
   document.getElementById('title').value = '';
@@ -60,7 +67,7 @@ UI.prototype.clearFields = function() {
 
 
 
-// Event Listeners
+// Event Listeners for add book
 document.getElementById('book-form').addEventListener('submit', function(e){
   // Get form values
     const title = document.getElementById('title').value,
@@ -89,4 +96,19 @@ document.getElementById('book-form').addEventListener('submit', function(e){
     }
 
     e.preventDefault();
+});
+
+// Event Listener for delete
+document.getElementById('book-list').addEventListener('click', function(e) {
+
+  // Instantiate UI
+  const ui = new UI();
+
+  // Delete book
+  ui.deleteBook(e.target);
+
+  // Show message
+  ui.showAlert('Book removed!', 'success');
+
+  e.preventDefault();
 });
