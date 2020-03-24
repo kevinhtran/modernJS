@@ -1,0 +1,9 @@
+// Keys & string values need to be wrapped in double qutoes
+// You can always check for validation on https://jsonlint.com/
+
+{
+  "id": 1,
+  "name": "Uzmaki Naruto",
+  "company": "123 Hidden Leaf",
+  "phone": "123-1234-5678"
+}
