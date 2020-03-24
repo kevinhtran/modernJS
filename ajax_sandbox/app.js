@@ -1,5 +1,10 @@
 // Section 7: Asynchronous JavaScript, Ajax, & Fetch API
-// [Part 3]: XHR Object Methods & Working with Text
+// [Part 4]: Working with Ajax & JSON
+
+// Objective:
+// Work with JSON instead of just plain text
+// JSON - JavaScript Object Notation
+// Very similar to JS objects
 
 document.getElementById('button').addEventListener('click', loadData);
 
