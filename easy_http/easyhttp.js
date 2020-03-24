@@ -3,6 +3,7 @@
 // Objective: 
 // 1. Used Ajax to make a GET request/method and get data from external API
 // 2. Make POST method
+// 3. Make PUT method
 
 function easyHTTP() {
   this.http = new XMLHttpRequest();
@@ -37,6 +38,17 @@ easyHTTP.prototype.post = function(url, data, callback) {
   this.http.send(JSON.stringify(data));
 }
 
-// Make an HTTP PUT Request 
+// Make an HTTP PUT Request
+easyHTTP.prototype.post = function (url, data, callback) {
+  this.http.open('POST', url, true);
+  this.http.setRequestHeader('Content-type', 'application/json');
+
+  let self = this;
+  this.http.onload = function () {
+    callback(null, self.http.responseText);
+  }
+
+  this.http.send(JSON.stringify(data));
+}
 
 // Make an HTTP DELETE Request 
