@@ -1,70 +1,37 @@
 // Section 7: Asynchronous JavaScript, Ajax, & Fetch API
-// [Part 4]: Working with Ajax & JSON
+// [Part 5]: Date From an External API - Chuck Norris Project
 
 // Objective:
-// Work with JSON instead of just plain text
-// JSON - JavaScript Object Notation
-// Very similar to JS objects
+// Fetch data from an external API using Ajax
+// Using a simple API that takes a GET request formatted as a certain URL and return random Chuck Norris Jokes (lol)
 
-document.getElementById('button1').addEventListener('click', loadCustomer);
-document.getElementById('button2').addEventListener('click', loadCustomers);
 
-// Load Single Customers
-function loadCustomer(e) {
+document.querySelector('.get-jokes').addEventListener('click', getJokes);
+
+function getJokes(e) {
+  const number = document.querySelector('input[type="number"]').value;
+
   const xhr = new XMLHttpRequest();
 
-  xhr.open('GET', 'customer.json', true);
+  xhr.open('GET', `http://api.icndb.com/jokes/random/${number}`, true);
 
   xhr.onload = function() {
     if(this.status === 200) {
-      // console.log(this.responseTest);
-
-      const customer = JSON.parse(this.responseText);
-
-      const output = `
-        <ul>
-          <li>ID: ${customer.id}</li>
-          <li>Name: ${customer.name}</li>
-          <li>Company: ${customer.company}</li>
-          <li>Phone: ${customer.phone}</li>
-        </ul>
-      `;
-
-      document.getElementById('customer').innerHTML = output;
-    }
-  }
-
-  xhr.send();
-}
-
-// Load Customers
-function loadCustomers(e) {
-  const xhr = new XMLHttpRequest();
-
-  xhr.open('GET', 'customers.json', true);
-
-  xhr.onload = function() {
-    if(this.status === 200) {
-      // console.log(this.responseTest);
-
-      const customers = JSON.parse(this.responseText);
-
+      const response = JSON.parse(this.responseText);
+      
       let output = '';
 
-      customers.forEach(function(customer) {
-        output += `
-        <ul>
-          <li>ID: ${customer.id}</li>
-          <li>Name: ${customer.name}</li>
-          <li>Company: ${customer.company}</li>
-          <li>Phone: ${customer.phone}</li>
-        </ul>
-      `;
-      });
+      if(response.type === 'success') {
+        response.value.forEach(function(joke) {
+          output += `<li>${joke.joke}</li>`;
+        });
+      } else {
+        output += '<li>Something went wrong</li>'; // append using +=
+      }
 
-      document.getElementById('customers').innerHTML = output;
+      document.querySelector('.jokes').innerHTML = output;
     }
   }
-
   xhr.send();
-};
+  e.preventDefault();
+}
