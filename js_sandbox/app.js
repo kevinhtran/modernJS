@@ -10,6 +10,13 @@ document.getElementById('button1').addEventListener('click', getText);
 function getText() {
   fetch('test.txt')
   .then(function(res) {
-    console.log(res);
+    return res.text();
   }); // fetch returns promises
+  .then(function(data) { // what we have here is a promise within a promise
+    console.log(data);
+    document.getElementById('output').innerHTML = data;
+  })
+  .catch(function(err) {
+    console.log(err)
+  })
 }
