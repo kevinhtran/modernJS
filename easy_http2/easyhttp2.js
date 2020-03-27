@@ -13,9 +13,11 @@
  class EasyHTTP {
    // Make an HTTP GET Request
    get(url) {
-     fetch(url) // fetch itself returns a promise
-      .then(res => res.json())
-      .then(data => console.log(data))
-      .catch(err => console.log(err));
-   }
+     return new Promise((resolve, reject) =>  {
+       fetch(url) // fetch itself returns a promise
+         .then(res => res.json())
+         .then(data => resolve(data))
+         .catch(err => reject(err));
+     });
+    }
  }
