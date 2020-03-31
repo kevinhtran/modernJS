@@ -1,37 +1,43 @@
 // Section 9: Error Handling & Regular Expressions
-// Part 1: Error Handling with Try... Catch
+// Regular Expression [Part 1] - Evaluation Functions
 
-// A try block lets us write some code to test for errors
-// A catch block lets us handle our own errors
-// We can also throw our own errors
-// a finally block runs no matter what
+// A regular expression is basically used to describe a pattern of characters
+// Used to pattern matching or searching.
+// Commonly used for validation as well as pulling things out of a body of text or a body of characters.
+// Email address, phone numbers, social security, things that have certain patterns in their formatting
 
-const user = {email: "jdoe@gmail.com"};
+let re;
+re = /hello/;
+re = /hello/i; // i = case insensitive
+// re = /hello/g; // Global search
 
-try {
-  // Produce a ReferenceError
-  // myFunction();
-  null.myFunction();
 
-  // Will produce SyntaxError
-  // eval('2+2');
+console.log(re); // => /hello/
+console.log(re.source); // => hello
 
-  // Will produce a URIError
-  // decodeURIComponent('%');
-  if(!user.name) {
-    // throw 'User has no name';
-    throw new SyntaxError('User has no name');
-  }
+exec() - Return result in an array or null
+const result = re.exec('hello world');
 
-} catch(e) {
-  console.log(`User ErrorL ${e.message}`);
-  // console.log(e);
-  // console.log(e.message);
-  // console.log(e.name);
-  // console.log(e instanceof ReferenceError);
-  // console.log(e instanceof TypeError);
-} finally {
-  console.log('Finally runs regardless of result...');
-}
+console.log(result);
+console.log(result[0]); // hello
+console.log(result.index); // 0
+console.log(result.input); // hello world
 
-console.log('Program continues...');
+// test() - Returns true or false
+const result = re.test('Hello');
+console.log(result);
+
+match() - Return result array or null
+const str = 'Hello There';
+const result = str.match(re);
+console.log(result);
+
+serach() - Returns index of the first match if not found returns -1
+const str = 'Hello There';
+const result = str.search(re);
+console.log(result);
+
+replace() - Return new string with some or all matches of a pattern
+const str = 'Hello There';
+const newStr = str.replace(re, 'Hi');
+console.log(newStr);
