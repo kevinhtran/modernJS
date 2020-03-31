@@ -1,55 +1,37 @@
-// Section 7:  Asynchronous JavaScript, Ajax & Fetch API
-// The Fetch API
+// Section 9: Error Handling & Regular Expressions
+// Part 1: Error Handling with Try... Catch
 
-// Objective: 
-// Recreate the easy HTTP library using Fetch API and some updated standards of ES6 instead of using prototypes.
+// A try block lets us write some code to test for errors
+// A catch block lets us handle our own errors
+// We can also throw our own errors
+// a finally block runs no matter what
 
-// Grab the button 1 ID that links to the text file
-document.getElementById('button1').addEventListener('click', getText);
+const user = {email: "jdoe@gmail.com"};
 
-// Grab the button 2 ID that links to the JSON file
-document.getElementById('button2').addEventListener('click', getJson);
+try {
+  // Produce a ReferenceError
+  // myFunction();
+  null.myFunction();
 
-// Grab the button 3 ID that links to the api file
-document.getElementById('button3').addEventListener('click', getExternal);
+  // Will produce SyntaxError
+  // eval('2+2');
 
-// get local text file data
-function getText() {
-  fetch('test.txt')
-    .then(res => res.text); // es6 way
-    .then(data => { // es6 way
-      console.log(data);
-      document.getElementById('output').innerHTML = data;
-    });
-    .catch(err => console.log(err));
-};
+  // Will produce a URIError
+  // decodeURIComponent('%');
+  if(!user.name) {
+    // throw 'User has no name';
+    throw new SyntaxError('User has no name');
+  }
 
-// get local JSON data
-function getJson() {
-  fetch('post.json')
-    .then(rest => res.json()); // fetch returns promises
-    .then(data => { // what we have here is a promise within a promise
-      console.log(data);
-      let output = '';
-      data.forEach(function(post) {
-        output += `<li>${post.title}</li>`
-      });
-      document.getElementById('output').innerHTML = output;
-    });
-    .catch(err => console.log(err));
-};
-
-// get from external API
-function getExternal() {
-  fetch('https://api.github.com/users')
-    .then(res => res.json); // fetch returns promises
-    .then(data => { // what we have here is a promise within a promise
-      console.log(data);
-      let output = '';
-      data.forEach(function (user) {
-        output += `<li>${user.login}</li>`;
-      });
-      document.getElementById('output').innerHTML = output;
-    });
-    .catch(err => console.log(err));
+} catch(e) {
+  console.log(`User ErrorL ${e.message}`);
+  // console.log(e);
+  // console.log(e.message);
+  // console.log(e.name);
+  // console.log(e instanceof ReferenceError);
+  // console.log(e instanceof TypeError);
+} finally {
+  console.log('Finally runs regardless of result...');
 }
+
+console.log('Program continues...');
