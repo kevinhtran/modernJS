@@ -1,34 +1,50 @@
 // Section 11: JavaScript Patterns
-// Singleton Pattern
+// Factory Pattern
 
-// a manifestation of the module pattern a singleton object is an immediate anonymous function and it can only return one instance of an object at a time.
-// only return one instance of an object at a time.
-//so repeated calls to the constructor will just return the same instance and like the module pattern it maintains a private reference which nothing from the outside can access.
-// Now an example of why you may want to use a singleton is maybe you only want for instance one user object created at a time maybe a logged in user.It would prevent you from having two users from being created at once.
-// oftentimes singletons are frowned upon because they give you a global point of access rather than embracing encapsulation and that bothers a lot of programmers and that they can also be kind of hard to debug
+// a way of creating an interface for creating objects but we can let subclasses define which classes to instantiate and factory methods are often used in applications to manage and maintain and manipulate collections of objects that are different.But at the same time have many common characteristics and a good example of that would be a member.But at the same time have many common characteristics and a good example of that would be a member.types but still have the same properties and methods.
 
+function MemberFactory(name, type) {
+  this.createMember =  function() {
+    let member;
 
-const Singleton = (function() {
-  let instance;
-
-  function createInstance() {
-    const object =  new Object({name:'Kevin'});
-    return object;
-  }
-
-  return {
-    getInstance: function() {
-      if(!instance){
-        instance = createInstance();
-      }
-      return instance;
+    if(type === 'simple') {
+      member = new SimpleMembership(name);  
+    } else if (type === 'standard') {
+      member = new StandardMembership(name);
+    } else if (type === 'super') {
+      member = new SuperMembership(name);
     }
+
+    member.type = type;
+
+    member.define = function() {
+      console.log(`${this.name} (${this.type}): ${this.cost}`);
+    }
+
+    return member;
   }
-})();
+}
 
-const instanceA = Singleton.getInstance();
-const instanceB = Singleton.getInstance();
+const SimpleMembership = function(name) {
+  this.name = name;
+  this.cost = '$5';
+}
+const StandardMembership = function(name) {
+  this.name = name;
+  this.cost = '$15';
+}
+const SuperMembership = function(name) {
+  this.name = name;
+  this.cost = '$25';
+}
 
-console.log(instance === instanceB);
+const members = [];
+const factory = new MemberFactory();
 
-// console.log(instanceA);
+members.push(factory.createMember('Kevin Tran, 'super'));
+
+// console.log(members);
+
+members.forEach(function(member) {
+  member.define();
+});
