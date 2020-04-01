@@ -1,54 +1,60 @@
 // Section 10: Other Newer Features - ES2015+
-//Destructuring Assignment
+// ES6 Maps
 
-let a, b;
-[a, b] = [100, 200];
-// Rest pattern
-[a, b, ...rest] = [100, 200, 300, 400, 500];
+// MAPS = key-value pairs - can use ANY type as a key or a value
 
-( {a, b} = {a: 100, b: 200, c: 300, d: 400, e: 500} ) ;
+const map1 = new Map();
 
-// Array Destructuring
+// Set Keys
+const key1 = 'some string',
+      key2 = {},
+      key3 = function() {};
 
-const people = ['John', 'Beth', 'Mike'];
 
-const [person1, person2, person3] = people;
+// Set map values by key
+map1.set(key1, 'Value of key1');
+map1.set(key2, 'Value of key2');
+map1.set(key3, 'Value of key3');
 
-console.log(a); // a
-console.log(b); // b
-console.log(rest); // 400, 500
-console.log(a, b); // 100, 200
-console.log(person1, person2, person3);
+// Get values by key
+console.log(map1.get(key1), map1.get(key2), map1.get(key3));
 
-// Parse array returned from function
-function getPeople() {
-  return ['John', 'Beth', 'Mike'];
+// Count values
+console.log(map1.size);
+
+// ITERATING MAPS
+
+// Loop using for...of to get keys and values
+for(let [key, value] of map1) {
+  console.log(`#{key} = ${value}`);
 }
 
-let person1, person2, person3;
-[person1, person2, person3] = getPeople();
-
-console.log(person1, person2, person3);
-
-// Object Destructuring
-const person = {
-  name: 'John Doe', 
-  age: 32,
-  city: 'Miami',
-  gender: 'Male',
-  sayHelo: function(){
-    console.log('Hello');
-  }
+// Iterate keys only
+for (let key of map1.key()) {
+  console.log(key);
 }
 
-// Old ES5
-const name = person.name,
-  age = person.age,
-  city = person.city;
+// Iterate values only
+for (let value of map1.values()) {
+  console.log(value);
+}
+
+// Loop with forEach
+map1.forEach(function(value, key) {
+  console.log(`${key} = ${value}`);
+});
 
 
-// New ES6 Destructuring
-const { name, age, city, sayHello } = person;
+// CONVERT TO ARRAYS
 
-console.log(name,age, city);
-sayHello();
+// Create an array of the key value pairs
+const keyValArr = Array.from(map1);
+console.log(keyValArr);
+
+// Create an array of the values
+const valArr = Array.from(map1.values());
+console.log(valArr);
+
+// Create an array of the keys
+const keyArr = Array.from(map1.keys());
+console.log(keyArr);
