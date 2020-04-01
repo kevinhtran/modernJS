@@ -1,32 +1,54 @@
 // Section 10: Other Newer Features - ES2015+
-// Symbols
+//Destructuring Assignment
 
-// Create a symbol
-const sym1 = new Symbol();
-const sym2 = new Symbol('sym2');
+let a, b;
+[a, b] = [100, 200];
+// Rest pattern
+[a, b, ...rest] = [100, 200, 300, 400, 500];
 
-console.log(Symbol() === Symbol('123'));
-console.log(`Hello ${sym1.toString()}`);
+( {a, b} = {a: 100, b: 200, c: 300, d: 400, e: 500} ) ;
 
-// Unique Object Keys
-const KEY1 = Symbol();
-const KEY2 = Symbol('sym2');
+// Array Destructuring
 
-const myObj = {};
+const people = ['John', 'Beth', 'Mike'];
 
-myObj[KEY1] = 'Prop1';
-myObj[KEY2] = 'Prop2';
-myObj.key3 = 'Prop3';
-myObj.key4 = 'Prop4';
+const [person1, person2, person3] = people;
 
-console.log(myObj[KEY1]);
-console.log(myObj[KEY2]);
+console.log(a); // a
+console.log(b); // b
+console.log(rest); // 400, 500
+console.log(a, b); // 100, 200
+console.log(person1, person2, person3);
 
-// Symbols are not enumerable in for ... in
-for(let i in myObj) {
-  console.log(`${i}: ${myObj[i]}`);
+// Parse array returned from function
+function getPeople() {
+  return ['John', 'Beth', 'Mike'];
 }
 
-// Symbols are ignored by JSON.stringify
-console.log(JSON.stringify({key: 'prop'}));
-console.log(JSON.stringify({[Symbol('sym1')]: 'prop'}));
+let person1, person2, person3;
+[person1, person2, person3] = getPeople();
+
+console.log(person1, person2, person3);
+
+// Object Destructuring
+const person = {
+  name: 'John Doe', 
+  age: 32,
+  city: 'Miami',
+  gender: 'Male',
+  sayHelo: function(){
+    console.log('Hello');
+  }
+}
+
+// Old ES5
+const name = person.name,
+  age = person.age,
+  city = person.city;
+
+
+// New ES6 Destructuring
+const { name, age, city, sayHello } = person;
+
+console.log(name,age, city);
+sayHello();
