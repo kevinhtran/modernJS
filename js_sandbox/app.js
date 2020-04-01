@@ -1,60 +1,47 @@
 // Section 10: Other Newer Features - ES2015+
-// ES6 Maps
+// ES6 Sets
+// Unique values whether it's primitive or reference
+// SETS - Store unique values of any type
 
-// MAPS = key-value pairs - can use ANY type as a key or a value
+const set1 = new Set();
 
-const map1 = new Map();
+// Add values to set
+set1.add(100);
+set1.add('A string');
+set1.add({name: 'John'});
+set1.add(true);
 
-// Set Keys
-const key1 = 'some string',
-      key2 = {},
-      key3 = function() {};
+// const set2 = new Set([1, true, 'string']); // you can use this format or the other format
+
+// console.log(set1);
 
 
-// Set map values by key
-map1.set(key1, 'Value of key1');
-map1.set(key2, 'Value of key2');
-map1.set(key3, 'Value of key3');
+// Get count
+// console.log(set1.size);
 
-// Get values by key
-console.log(map1.get(key1), map1.get(key2), map1.get(key3));
 
-// Count values
-console.log(map1.size);
+// Check for values
+console.log(set1.has(100));
+console.log(set1.has(50 + 50));
+console.log(set1.has({name: 'John'}));
 
-// ITERATING MAPS
+// Delete from set
+set1.delete(100);
 
-// Loop using for...of to get keys and values
-for(let [key, value] of map1) {
-  console.log(`#{key} = ${value}`);
+// console.log(set1);
+
+// ITERATE THROUGH SETS
+
+// For..of
+for(let item of set1) {
+  console.log(item);
 }
 
-// Iterate keys only
-for (let key of map1.key()) {
-  console.log(key);
-}
-
-// Iterate values only
-for (let value of map1.values()) {
+// ForEach Loop
+set1.forEach((value) => {
   console.log(value);
-}
-
-// Loop with forEach
-map1.forEach(function(value, key) {
-  console.log(`${key} = ${value}`);
 });
 
-
-// CONVERT TO ARRAYS
-
-// Create an array of the key value pairs
-const keyValArr = Array.from(map1);
-console.log(keyValArr);
-
-// Create an array of the values
-const valArr = Array.from(map1.values());
-console.log(valArr);
-
-// Create an array of the keys
-const keyArr = Array.from(map1.keys());
-console.log(keyArr);
+// CONVERT SET TO ARRAY
+const setArr = Array.from(set1);
+console.log(setArr);
