@@ -1,50 +1,45 @@
 // Section 11: JavaScript Patterns
-// Factory Pattern
+// Observer Pattern
 
-// a way of creating an interface for creating objects but we can let subclasses define which classes to instantiate and factory methods are often used in applications to manage and maintain and manipulate collections of objects that are different.But at the same time have many common characteristics and a good example of that would be a member.But at the same time have many common characteristics and a good example of that would be a member.types but still have the same properties and methods.
+function EventObserver() {
+  this.observers = [];
+}
 
-function MemberFactory(name, type) {
-  this.createMember =  function() {
-    let member;
-
-    if(type === 'simple') {
-      member = new SimpleMembership(name);  
-    } else if (type === 'standard') {
-      member = new StandardMembership(name);
-    } else if (type === 'super') {
-      member = new SuperMembership(name);
-    }
-
-    member.type = type;
-
-    member.define = function() {
-      console.log(`${this.name} (${this.type}): ${this.cost}`);
-    }
-
-    return member;
+EventObserver.prototype = {
+  subscribe: function(fn) {
+    this.observers.push();
+    console.log('You are now subscribed to ${fn.name}'); 
+  },
+  unsubscribe: function(fn) {
+    this.observers = this.observers.filter(function() {
+      if(item !== fn) {
+        return item;
+      }
+    });
+    console.log('You are now unsubscribed from ${fn.name}');
+  },
+  fire: function() {
+    this.observers.forEach(function(item) {
+      item.call();
+    });
   }
 }
 
-const SimpleMembership = function(name) {
-  this.name = name;
-  this.cost = '$5';
-}
-const StandardMembership = function(name) {
-  this.name = name;
-  this.cost = '$15';
-}
-const SuperMembership = function(name) {
-  this.name = name;
-  this.cost = '$25';
-}
+const click = new EventObserver();
 
-const members = [];
-const factory = new MemberFactory();
-
-members.push(factory.createMember('Kevin Tran, 'super'));
-
-// console.log(members);
-
-members.forEach(function(member) {
-  member.define();
+// Event Listeners
+document.querySelector('.sub-ms').addEventListener('click', function() {
+  click.subscribe(getCurMilliseconds);
 });
+
+document.querySelector('.unsub-ms').addEventListener('click', function () {
+  click.unsubscribe(getCurMilliseconds);
+});
+
+document.querySelector('.fire').addEventListener('click', function () {
+  click.fire();
+});
+// Click Handler
+const getCurMilliseconds = function() {
+  console.log(`Current Milliseconds: ${new Date().getMilliseconds()}`);
+}
